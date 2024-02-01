@@ -7,16 +7,49 @@
 </ng-template>
 
 
-<div *ngIf="hero; else divLoading" class="grid">
+<div class="grid mt-2" *ngIf="hero; else divLoading">
 
-  <mat-card class="col-12 sm:col-6">
+  <mat-card class="col-12 sm:col-12 md:col-6 md:col-offset-3 lg:col-6 lg:col-offset-3 xl:col-2 xl:col-offset-4">
     <mat-card-header>
+      <div mat-card-avatar class="header-image"></div>
       <mat-card-title>{{ hero.alter_ego }}</mat-card-title>
       <mat-card-subtitle>{{ hero.superhero }}</mat-card-subtitle>
     </mat-card-header>
 
-    <img [src]="hero | heroImage" [alt]="hero.superhero" mat-card-image>
+    <mat-divider></mat-divider>
 
+    <img mat-card-image [src]="hero | heroImage" [alt]="hero.superhero" class="pt-2">
+
+    <mat-card-content class="p-2">
+      <h4><strong>{{ hero.publisher }}</strong></h4>
+      <p> <strong>Primera aparición:</strong> {{ hero.first_appearance }} </p>
+    </mat-card-content>
+
+    <mat-divider></mat-divider>
+
+    <mat-card-actions>
+      <button mat-button mat-raised color="warn" [routerLink]="['/heroes/list']">
+        <mat-icon>arrow_back_ios</mat-icon>
+        Volver
+      </button>
+    </mat-card-actions>
+
+  </mat-card>
+
+  <mat-card class="col-12 sm:col-12 md:col-6 lg:col-6 xl:col-2">
+    <mat-card-header>
+      <mat-card-title>Información</mat-card-title>
+      <mat-card-subtitle>{{ hero.superhero }}</mat-card-subtitle>
+    </mat-card-header>
+
+    <mat-divider></mat-divider>
+
+    <mat-card-content class="mt-3">
+      <mat-list-item>
+        <span matListItemTitle><strong>Alter egos</strong></span>
+        <span matListItemLine *ngFor="let name of hero.characters.split(',') | slice:0:3">{{name}}</span>
+      </mat-list-item>
+    </mat-card-content>
   </mat-card>
 
 </div>
